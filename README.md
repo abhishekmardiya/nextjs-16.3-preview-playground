@@ -1,58 +1,43 @@
-# Next.js 16 Clean App
+I have an application running on the latest Next.js (v16), which works perfectly under normal conditions. However, after migrating to **Cache Components**, I started encountering multiple issues—even though I’ve followed all the required cache component rules.
 
-Next.js 16 application built with React 19, React Compiler 1.0
-, Biome, TypeScript, and Tailwind CSS.
+One specific issue I’m reporting here is that **a form fails to re-render correctly when navigating between routes via `<Link>`**.
 
-## Prerequisites
+---
 
-Before you begin, ensure you have the following installed on your machine:
+## 🔗 Reproduction Repository
 
-- [Node.js](https://nodejs.org/) Node.js 20.9+ (Minimum version is 20.9.0(LTS))
-- [TypeScript](https://www.typescriptlang.org/) 5+ (Minimum version is 5.1.0)
+https://github.com/abhishekmardiya/cache-components-issues
 
-### Browser Support
+---
 
-- Chrome 111+
-- Edge 111+
-- Firefox 111+
-- Safari 16.4+
+## 🔁 Reproduction Steps
 
-## Installation
+1. Navigate to the form page from the homepage using a link.
+2. Remove the value from the input field.
+3. Click **“Go to Test 2”** (navigate to `/test-2`).
+4. Remove the input value again.
+5. Click **“Go to Test 1”** (navigate back to `/test-1`).
 
-### 1. Clone the repository
+At this point, you’ll notice that the **default value is no longer restored in the form input** as you move back and forth between these two routes.
 
-```bash
-git clone https://github.com/abhishekmardiya/next-js-16-clean-app.git
-```
+---
 
-### 2. Install dependencies
+## ✅ Expected Behavior
 
-```bash
-npm install
-```
+The form should re-render and display the default input value every time the route changes.
 
-### 4. Run the development server
+---
 
-```bash
-npm run dev
-```
+## ❌ Actual Behavior
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The input retains the previously cleared state, and the default value is not restored when navigating back.
 
-## Available Scripts
+---
 
-- `npm run dev` - Starts the development server
-- `npm run build` - Builds the app for production
-- `npm run start` - Starts the production server
-- `npm run lint` - Runs the linter (Biome)
-- `npm run format` - Formats the code (Biome)
+## 📝 Additional Notes
 
-## Tech Stack
+- This behavior **does not occur when Cache Components are disabled**.
+- The issue only appears after migrating to Cache Components.
 
-- **Framework**: Next.js 16.0.0
-- **React**: 19.2.0
-- **React Compiler**: 1.0
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS 4
-- **Linting**: Biome
-- **Package Manager**: npm
+Could someone please explain why this happens with Cache Components enabled? Understanding this behavior would help me identify the correct fix.
+@icyJoseph 
