@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export const Form = () => {
   const pathname = usePathname();
+  const { bfcacheId } = useRouter();
 
   const userName = "Abhishek";
 
@@ -15,6 +16,7 @@ export const Form = () => {
           type="text"
           defaultValue={userName}
           className="border-2 border-gray-300 rounded-md p-2"
+          key={bfcacheId}
         />
 
         <Link
